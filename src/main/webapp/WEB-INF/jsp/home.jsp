@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>${data} 안녕하세요 손님</p>
+	<p>${name} 님 환영합니다.</p>
+	<p>나이는 ${age} 이며,</p>
+	<p>${gender} 입니다.</p>
 </body>
 </html>
