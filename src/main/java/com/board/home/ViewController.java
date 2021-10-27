@@ -5,13 +5,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ViewController {
-	
+	private static final Logger logger = LoggerFactory.getLogger(ViewController.class);
 //	@RequestMapping("/") 
 //	public String indexpage() { return "/index"; }
 	
@@ -28,9 +30,11 @@ public class ViewController {
 		jsonobject.put("age", age);
 		jsonobject.put("gender", gender);
 		try {
+//			logger.info(jsonobject.toString()); // test
 			response.setContentType("application/x-json; charset=UTF-8");
 			response.getWriter().print(jsonobject);
 		} catch (Exception e) {
+			logger.debug(e.toString());
 			e.printStackTrace();
 		}
 		
