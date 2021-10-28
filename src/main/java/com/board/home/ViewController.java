@@ -77,4 +77,10 @@ public class ViewController {
 		System.out.println("error");
 		return "/error";
 	}
+	
+	@RequestMapping(value="/bootstrapTest", method=RequestMethod.POST) 
+	public String bootstrap(HttpServletRequest request, HttpServletResponse response ) {
+		System.out.println("bootstrap");
+		return "/bootstrapTest";
+	}
 }

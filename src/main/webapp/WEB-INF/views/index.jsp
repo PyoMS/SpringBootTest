@@ -8,6 +8,9 @@
 		<meta charset="EUC-KR">
 		<title>Insert title here</title>
 		<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<!-- 		<script src="../js/scripts.js"></script> -->
+<!-- 		<link href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
+		
 		<script type="text/javascript">
 			var isClicked = false;
 			function myClick(){
@@ -75,5 +78,12 @@
 		</div>
 		<!-- end form:form test -->
 		<p id="result"></p>
+		
+		<div>
+			<form action="bootstrapTest" method="post">
+				<button type="submit">사이트</button>
+			</form>
+		</div>
+		
 	</body>
 </html>
