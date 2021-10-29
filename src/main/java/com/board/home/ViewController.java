@@ -15,9 +15,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.board.home.VO.UserVO;
 
+
 @Controller
 public class ViewController {
 	private static final Logger logger = LoggerFactory.getLogger(ViewController.class);
+	
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public String index(HttpServletRequest request, HttpServletResponse response ) {
+		return "/login";
+	}
 	
 	@RequestMapping(value="/analysis", method=RequestMethod.POST) //RequsetMapping은 기본적으로 GET 방식으로 교환한다. method 설정 시 POST 전환.
 	public void analysis(HttpServletRequest request, HttpServletResponse response ) {
@@ -74,13 +80,14 @@ public class ViewController {
 	
 	@RequestMapping(value="/error", method=RequestMethod.POST) 
 	public String error(HttpServletRequest request, HttpServletResponse response ) {
-		System.out.println("error");
+		logger.info("--- start error page ---");
 		return "/error";
 	}
 	
-	@RequestMapping(value="/bootstrapTest", method=RequestMethod.POST) 
+	//bootstrap test page
+	@RequestMapping(value="/test", method=RequestMethod.GET) 
 	public String bootstrap(HttpServletRequest request, HttpServletResponse response ) {
-		System.out.println("bootstrap");
+		logger.info("--- start bootstrapTest page ---");
 		return "/bootstrapTest";
 	}
 }
