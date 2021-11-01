@@ -22,40 +22,38 @@
 		<link href="/css/login.css" rel="stylesheet"/>
 	</head>
 	<body style="">
-	<div class="container bootstrap snippets bootdey">
-		  <div class="header">
-		    <ul class="nav nav-pills pull-right">
-		      <li><a href="#">&nbsp;</a></li>
-		    </ul>
-		    <h3 class="text-muted prj-name">Login</h3>
-		  </div>
-	
-		  <div style="height:auto;min-height:300px;" class="jumbotron">
-	<!-- 	    <div class="col-md-4"> -->
-	<!-- 	       <img class="img-responsive center-block img-user" src="assets/img/login_img2.jpg">  -->
-	<!-- 	    </div> -->
-			<!-- TODO 백그라운드에 img 전체 차지할 수 있게 디자인. -->
-			    <div class="col-md-0 form-content">
-				      <form accept-charset="utf-8" method="post" id="UserLoginForm" class="form-signin" action="">    	
-					       <h1 class="form-signin-heading text-muted">Board</h1>
-					       <input type="text" id="username" autofocus="autofocus" placeholder="Username" class="form-control" name="username">
-					       <input type="password" id="password" placeholder="Password" class="form-control" name="password">			
-					       <button type="button" class="btn btn-lg btn-info btn-block">
-					         <i class="fa fa-share"></i>
-					         Login
-					       </button>
-				      </form>    
-			    </div>
-		  </div>
-	</div>
-	<div class="col-md-12">     
-	  <div class="container bootstrap snippets bootdey">     
-	    <footer class="footer">
-	      <p>ⓒ Company OriginP 2021</p>
-	    </footer>
-	  </div>
-	</div>
-	
-	
+		<div class="container bootstrap snippets bootdey">
+			<div class="header">
+				<ul class="nav nav-pills pull-right">
+					<li><a href="#">&nbsp;</a></li>
+				</ul>
+				<h3 class="text-muted prj-name"><a href="/login">Login</a></h3>
+			</div>
+			<div style="height:auto;min-height:300px;" class="jumbotron">
+		<!-- 	    <div class="col-md-4"> -->
+		<!-- 	       <img class="img-responsive center-block img-user" src="assets/img/login_img2.jpg">  -->
+		<!-- 	    </div> -->
+				<!-- TODO 백그라운드에 img 전체 차지할 수 있게 디자인. -->
+				<div class="col-md-0 form-content">
+					<form accept-charset="utf-8" method="post" id="UserLoginForm" class="form-signin" action="">    	
+						<h1 class="form-signin-heading text-muted">Board</h1>
+						<input type="text" id="username" autofocus="autofocus" placeholder="Username" class="form-control" name="username">
+						<input type="password" id="password" placeholder="Password" class="form-control" name="password">			
+						<button type="button" class="btn btn-lg btn-info btn-block">
+							<i class="fa fa-share"></i>
+							Login
+						</button>
+					</form> 
+				</div>
+				<a class="col-md-2" href="/index">sign up</a>   
+			</div>
+		</div>
+		<div class="col-md-12">     
+			<div class="container bootstrap snippets bootdey">     
+				<footer class="footer">
+					<p>ⓒ Company OriginP 2021</p>
+				</footer>
+			</div>
+		</div>
 	</body>
 </html>

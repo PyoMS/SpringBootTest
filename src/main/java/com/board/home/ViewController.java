@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,9 +21,19 @@ import com.board.home.VO.UserVO;
 public class ViewController {
 	private static final Logger logger = LoggerFactory.getLogger(ViewController.class);
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String index(HttpServletRequest request, HttpServletResponse response ) {
+	@RequestMapping(value={"/","/login"}, method=RequestMethod.GET)
+	public String login(HttpServletRequest request, HttpServletResponse response ) {
 		return "/login";
+	}
+	
+	@RequestMapping(value={"/index"}, method=RequestMethod.GET)
+	public String index(HttpServletRequest request, HttpServletResponse response ) {
+		return "/index";
+	}
+	
+	@RequestMapping(value="/page/{index}.do", method=RequestMethod.GET)
+	public String page(@PathVariable int index, HttpServletRequest request, HttpServletResponse response ) {
+		return "/page/"+index;
 	}
 	
 	@RequestMapping(value="/analysis", method=RequestMethod.POST) //RequsetMapping은 기본적으로 GET 방식으로 교환한다. method 설정 시 POST 전환.
@@ -85,7 +96,7 @@ public class ViewController {
 	}
 	
 	//bootstrap test page
-	@RequestMapping(value="/test", method=RequestMethod.GET) 
+	@RequestMapping(value="/bootstrapTest", method=RequestMethod.POST) 
 	public String bootstrap(HttpServletRequest request, HttpServletResponse response ) {
 		logger.info("--- start bootstrapTest page ---");
 		return "/bootstrapTest";
