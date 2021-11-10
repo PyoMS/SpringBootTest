@@ -79,6 +79,9 @@ public class ViewController {
 	public String enrollment(@ModelAttribute("userInfo")UserVO userVO, Model model ) {
 		System.out.println("@enrollment");
 		try {
+			if(userVO==null) {
+				System.out.println("@");
+			}
 			model.addAttribute("name", userVO.getName());
 			model.addAttribute("age", userVO.getAge());
 			model.addAttribute("gender", userVO.getGender());
