@@ -27,7 +27,9 @@ public class ViewController {
 	}
 	
 	@RequestMapping(value={"/index"}, method=RequestMethod.GET)
-	public String index(HttpServletRequest request, HttpServletResponse response ) {
+	public String index(HttpServletRequest request, HttpServletResponse response, Model model ) {
+		UserVO userInfo = new UserVO(); 
+		model.addAttribute("userInfo", userInfo);
 		return "/index";
 	}
 	
@@ -77,7 +79,8 @@ public class ViewController {
 	// @ModelAttribute 가 형변환도 알아서 처리함.
 	@RequestMapping(value="/enrollment", method=RequestMethod.POST)
 	public String enrollment(@ModelAttribute("userInfo")UserVO userVO, Model model ) {
-		System.out.println("@enrollment");
+		logger.info("--- start enrollment ---");
+
 		try {
 			if(userVO==null) {
 				System.out.println("@");

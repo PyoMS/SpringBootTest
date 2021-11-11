@@ -1,9 +1,9 @@
 package com.board.home.VO;
 
 public class UserVO {
-	private String name="";
-	private int age=1;
-	private String gender="남성";
+	private String name;
+	private int age;
+	private String gender;
 	
 	public String getName() {
 		return name;

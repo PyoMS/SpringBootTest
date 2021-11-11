@@ -10,7 +10,7 @@
 		<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
 <!-- 		<script src="../js/scripts.js"></script> -->
 		<link href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-		<link href="/css/test.css" rel="stylesheet"/>
+<!-- 		<link href="/css/test.css" rel="stylesheet"/> -->
 		
 		<script type="text/javascript">
 			var isClicked = false;
@@ -42,6 +42,13 @@
 					});
 				}
 			}
+			
+			function checkForm(userInfo){
+				alert('test');
+				console.log(userInfo.name);
+				console.log(userInfo.age);
+				console.log(userInfo.gender);
+			}
 		</script>
 	</head>
 
@@ -67,14 +74,16 @@
 		<!-- start form:form test - add VO-->
 		<section class="projects-section" id="about">
 			<div id="information">
-				<form:form action="enrollment" method="post" modelAttribute="userInfo"> <!-- @modelAttribute 사용 - VO클래스  -->
-					이름 : <input type="text" maxlength="7" name="name"/><br>
-					나이 : <input type="number" min="1" max="150" step="1" name="age"/><br> <!-- step은 숫자와의 간격. 소수점나이 x -->
+				<form:form commandName="enrollment" action="enrollment" method="post" modelAttribute="userInfo"> <!-- @modelAttribute 사용 - VO클래스  -->
+					이름 : <form:input path="name" type="text" maxlength="7"/><br>
+					나이 : <form:input path="age" type="number" min="1" max="150" step="1" value="1"/><br> <!-- step은 숫자와의 간격. 소수점나이 x -->
 					성별 : 
-					<input type="radio" name="gender" value="남성" checked/> 남성
-					<input type="radio" name="gender" value="여성"/> 여성
+					<form:radiobutton  path="gender"  value="M" label="남성" checked="checked"/> <!-- value값 영문으로 할 것. -->
+					<form:radiobutton  path="gender" value="F" label="여성"/>
+<%-- 					<form:radiobutton path = "gender" value = "M" label = "Male"/> --%>
+<%--                  	<form:radiobutton path = "gender" value = "F" label = "Female" />	 --%>
 					<br><br>
-				<button type="submit" id="analysisBtn" >분석</button>
+					<button type="submit" id="analysisBtn" >분석</button>
 				<!-- 		<button type="button" onclick="myClick()">분석</button> -->
 				</form:form>
 			</div>
