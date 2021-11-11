@@ -43,12 +43,14 @@
 				}
 			}
 			
-			function checkForm(userInfo){
+			//TODO btn event 처리할 것. - null check.
+			$('#analysisBtn').click(function(userInfo) {
 				alert('test');
-				console.log(userInfo.name);
-				console.log(userInfo.age);
-				console.log(userInfo.gender);
-			}
+				console.log('@@@@@@@@@@@');
+// 				$('#analysisBtn').submit(); 
+				}
+			);
+
 		</script>
 	</head>
 
@@ -83,7 +85,7 @@
 <%-- 					<form:radiobutton path = "gender" value = "M" label = "Male"/> --%>
 <%--                  	<form:radiobutton path = "gender" value = "F" label = "Female" />	 --%>
 					<br><br>
-					<button type="submit" id="analysisBtn" >분석</button>
+					<button id="analysisBtn">분석</button>
 				<!-- 		<button type="button" onclick="myClick()">분석</button> -->
 				</form:form>
 			</div>

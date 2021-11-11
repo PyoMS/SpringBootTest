@@ -53,7 +53,7 @@ public class ViewController {
 			response.setContentType("application/x-json; charset=UTF-8");
 			response.getWriter().print(jsonobject);
 		} catch (Exception e) {
-			logger.debug(e.toString());
+			logger.error(e.toString());
 			e.printStackTrace();
 		}
 		
@@ -70,7 +70,7 @@ public class ViewController {
 			model.addAttribute("age", age);
 			model.addAttribute("gender", gender);
 		} catch (Exception e) {
-			logger.debug(e.toString());
+			logger.error(e.toString());
 			e.printStackTrace();
 		}
 		return "/home";
@@ -89,7 +89,7 @@ public class ViewController {
 			model.addAttribute("age", userVO.getAge());
 			model.addAttribute("gender", userVO.getGender());
 		} catch (Exception e) {
-			logger.debug(e.toString());
+			logger.error(e.toString());
 			e.printStackTrace();
 		}
 		return "/home";

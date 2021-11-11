@@ -1,6 +1,7 @@
 package com.board.home.VO;
 
 public class UserVO {
+	
 	private String name;
 	private int age;
 	private String gender;
