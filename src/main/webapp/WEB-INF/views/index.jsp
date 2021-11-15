@@ -14,6 +14,7 @@
 		
 		<script type="text/javascript">
 			var isClicked = false;
+			console.log('index.jsp');
 			function myClick(){
 				console.log('click()');
 				if(!isClicked){
@@ -43,13 +44,18 @@
 				}
 			}
 			
-			//TODO btn event 처리할 것. - null check.
-			$('#analysisBtn').click(function(userInfo) {
-				alert('test');
-				console.log('@@@@@@@@@@@');
-// 				$('#analysisBtn').submit(); 
-				}
-			);
+			$(function(){ //2021.11.15 alert까지만 처리. 최종 Controller에서 처리.
+				$('#analysisBtn').click(function(userInfo) {
+						var n = $('#name').val();
+						if(n==''){ 
+							alert('이름을 입력해주세요.');
+							//Controller 에서 return값 설정.
+						}
+						else{}
+					}
+				);
+			});
+			
 
 		</script>
 	</head>
@@ -77,7 +83,7 @@
 		<section class="projects-section" id="about">
 			<div id="information">
 				<form:form commandName="enrollment" action="enrollment" method="post" modelAttribute="userInfo"> <!-- @modelAttribute 사용 - VO클래스  -->
-					이름 : <form:input path="name" type="text" maxlength="7"/><br>
+					이름 : <form:input class="name" path="name" type="text" maxlength="7"/><br>
 					나이 : <form:input path="age" type="number" min="1" max="150" step="1" value="1"/><br> <!-- step은 숫자와의 간격. 소수점나이 x -->
 					성별 : 
 					<form:radiobutton  path="gender"  value="M" label="남성" checked="checked"/> <!-- value값 영문으로 할 것. -->
@@ -85,9 +91,12 @@
 <%-- 					<form:radiobutton path = "gender" value = "M" label = "Male"/> --%>
 <%--                  	<form:radiobutton path = "gender" value = "F" label = "Female" />	 --%>
 					<br><br>
-					<button id="analysisBtn">분석</button>
-				<!-- 		<button type="button" onclick="myClick()">분석</button> -->
+					
+					<form:button id="analysisBtn">분석</form:button>
+<!-- 					<button id="analysisBtn">분석</button> -->
 				</form:form>
+<!-- 				<button id="analysisBtn" value="userInfo">분석</button> -->
+				
 			</div>
 		</section>
 		<!-- end form:form test -->

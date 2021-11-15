@@ -82,8 +82,9 @@ public class ViewController {
 		logger.info("--- start enrollment ---");
 
 		try {
-			if(userVO==null) {
-				System.out.println("@");
+			if(userVO.getName()==""||userVO.getName().equals("")) {
+				logger.info("userVO.getName() is empty - " + userVO.getName());
+				return "/index";
 			}
 			model.addAttribute("name", userVO.getName());
 			model.addAttribute("age", userVO.getAge());
