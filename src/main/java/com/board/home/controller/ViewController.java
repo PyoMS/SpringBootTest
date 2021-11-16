@@ -1,4 +1,4 @@
-package com.board.home;
+package com.board.home.controller;
 
 
 import javax.servlet.http.HttpServletRequest;
