@@ -1,24 +1,34 @@
 package com.board.util;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 //TODO Config apikey properties 설정.
-@Component
-@PropertySource("classpath:application_APIKEY.properties")
+@Configuration
+@ComponentScan(basePackages = {"com.board.*"})
+@PropertySource("classpath:apikey.properties")
 public class ApiKey {
+//	@Autowired
+//	private static Environment env;
+//	@Bean
+//	public static String getApiKey() {
+//		return new String(env.getProperty("apikey"));
+//	}
+	@Value("${apikey.value}")
+	private static String api;
 	
-	private String API;
+	public static String getApiKey() {
+		return api;
+	}
 	
-	@Autowired
-	public ApiKey(@Value("${api-key}")String apikey) {
-		this.API = apikey;
-	}
-
-	public String getAPI() {
-		return API;
-	}
+	@Bean
+    public static PropertySourcesPlaceholderConfigurer properties() {
+        PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+        return propertySourcesPlaceholderConfigurer;
+    }
+	
 }

@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 
 src/main/resources/application_APIKEY.properties
-
+src/main/resources/apikey.properties
 ### STS ###
 .apt_generated
 .classpath
