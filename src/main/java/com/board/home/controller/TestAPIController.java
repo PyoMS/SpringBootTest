@@ -19,13 +19,6 @@ public class TestAPIController {
 		this.testAPIService = testAPIService;
 	}
 	
-	@GetMapping("/Test")
-	public String TestWebClient(Model model) {
-		String response = testAPIService.getFirstTodoTest();
-		model.addAttribute("response", response);
-		logger.info(response);
-		return response;
-	}
 	@GetMapping("/darttest")
 	public String TestDart(Model model) {
 		String response = testAPIService.getDartTest();
