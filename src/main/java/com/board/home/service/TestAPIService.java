@@ -5,6 +5,8 @@ import java.nio.file.Paths;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -57,11 +59,16 @@ public class TestAPIService {
 	
 	/**
 	 * json data 받아서 jsonarray로 처리.
-	 * TODO array의 항목명은 어떻게 처리? ex) bgn_de=20200117 의 경우 'bgn_de'에 해당하는 값*/
-	public String getDartTest(JSONObject jsonobj) {
+	 * TODO array의 항목명은 어떻게 처리? ex) bgn_de=20200117 의 경우 'bgn_de'에 해당하는 값
+	 * @throws Exception */
+	public String getDartTest(JSONObject jsonobj) throws Exception {
 		System.out.println("@getDartTest API - " + API);
-		JSONArray array = (JSONArray)jsonobj.get("list");
-		String[] str = (String[])array.toArray();
+		JSONParser jsonParser = new JSONParser();
+		
+		JSONObject jobj = (JSONObject)jsonParser.parse(jsonobj.toJSONString()); //json 전체 파싱
+		
+//		String[] str = (String[])array.toArray(); //TODO test
+		String[] str = {};
 		
 		StringBuffer uri=new StringBuffer();
 		uri.append(QUESTIONMARK).append("crtfc_key=").append(API);
