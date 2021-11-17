@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.board.util.ApiKey;
 import com.board.util.ReadFile;
 
 
@@ -23,6 +24,7 @@ public class TestAPIService {
 	Path path = Paths.get("src/main/resources/apikey.properties");
 	private ReadFile apikey = new ReadFile(path);
 	private final String API = apikey.getStringData();
+//	private final String API = ApiKey.getApikey();
 	
 	public TestAPIService(WebClient.Builder webClientBuilder) {
 		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/list.json").build();

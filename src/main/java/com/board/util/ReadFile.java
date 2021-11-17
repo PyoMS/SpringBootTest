@@ -18,6 +18,10 @@ public class ReadFile {
 			File file = new File(path.toString());
 			if(!file.exists()){throw new FileNotFoundException();}
 			this.data = Files.readString(path);
+			
+			if(data.contains("=")) {
+				data = data.substring(data.indexOf('=')+1);
+			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
