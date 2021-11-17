@@ -19,7 +19,7 @@ import com.board.util.ReadFile;
 @Service
 public class TestAPIService {
 	private static final Logger logger = LoggerFactory.getLogger(TestAPIService.class);
-	private final WebClient webClient;
+	private WebClient webClient;
 	private final String QUESTIONMARK = "?";
 	private final String AMPERSAND = "&";
 	
@@ -29,9 +29,24 @@ public class TestAPIService {
 //	private final String API = ApiKey.getApikey();
 	
 	public TestAPIService(WebClient.Builder webClientBuilder) {
-		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/list.json").build();
+		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/list.json").build(); // list
+//		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/corpCode.xml").build(); //고유번호
 	}
 	
+	/**
+	 * TODO) 1. API -> binary 타입으로 호출됨 2. WebClient buffer limit 설정
+	 * 고유번호 조회*/
+	public String getUniqueNumber() {
+//		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/corpCode.xml").build(); //고유번호
+		StringBuffer uri=new StringBuffer();
+		uri.append(QUESTIONMARK).append("crtfc_key=").append(API);
+		
+		String response =
+				this.webClient.get().uri(uri.toString())
+				.retrieve().bodyToMono(String.class)
+				.block();
+		return response;
+	}
 	
 	//TODO 해당 입력 정보를 array 형태로 받아서 for문으로 AMPERSAND 처리할 것. - json to array 처리.
 	public String getDartTest() {

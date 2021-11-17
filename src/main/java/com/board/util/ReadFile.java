@@ -17,8 +17,7 @@ public class ReadFile {
 		try {
 			File file = new File(path.toString());
 			if(!file.exists()){throw new FileNotFoundException();}
-			this.data = Files.readString(path);
-			
+			this.data = Files.readAllLines(path).get(0);
 			if(data.contains("=")) {
 				data = data.substring(data.indexOf('=')+1);
 			}

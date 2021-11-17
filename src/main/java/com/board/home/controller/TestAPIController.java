@@ -12,7 +12,7 @@ import com.board.home.service.TestAPIService;
 @RestController
 public class TestAPIController {
 	private static final Logger logger = LoggerFactory.getLogger(TestAPIController.class);
-	final TestAPIService testAPIService;
+	TestAPIService testAPIService;
 	
 	@Autowired
 	public TestAPIController(TestAPIService testAPIService) {
@@ -22,6 +22,14 @@ public class TestAPIController {
 	@GetMapping("/darttest")
 	public String TestDart(Model model) {
 		String response = testAPIService.getDartTest();
+		model.addAttribute("response", response);
+		logger.info(response);
+		return response;
+	}
+	
+	@GetMapping("/getUniqNum")
+	public String getUniqNum(Model model) {
+		String response = testAPIService.getUniqueNumber();
 		model.addAttribute("response", response);
 		logger.info(response);
 		return response;
