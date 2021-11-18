@@ -14,6 +14,7 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.board.util.ApiKey;
+import com.board.util.CreateZip;
 import com.board.util.ReadFile;
 
 
@@ -71,10 +72,14 @@ public class TestAPIService {
 			uri.append(str[i]);
 		}
 		logger.debug("uri data - "+uri.toString());
+		//TODO Stream으로 받을 것.
 		String response =
 				this.webClient.get().uri(uri.toString())
 				.retrieve().bodyToMono(String.class)
 				.block();
+		
+		CreateZip cz = new CreateZip(response);
+		
 		return response;
 	}
 	
