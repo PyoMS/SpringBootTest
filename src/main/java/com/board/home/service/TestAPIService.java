@@ -10,6 +10,7 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.board.util.ApiKey;
@@ -29,15 +30,17 @@ public class TestAPIService {
 //	private final String API = ApiKey.getApikey();
 	
 	public TestAPIService(WebClient.Builder webClientBuilder) {
-		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/list.json").build(); // list
-//		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/corpCode.xml").build(); //고유번호
+		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/corpCode.xml").build(); //고유번호
+//		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/list.json").build(); // list
 	}
 	
 	/**
-	 * TODO) 1. API -> binary 타입으로 호출됨 2. WebClient buffer limit 설정
+	 * TODO) 1. API -> binary 타입으로 호출됨 
+	 * 2. WebClient buffer limit 설정
 	 * 고유번호 조회*/
 	public String getUniqueNumber() {
 //		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/corpCode.xml").build(); //고유번호
+		
 		StringBuffer uri=new StringBuffer();
 		uri.append(QUESTIONMARK).append("crtfc_key=").append(API);
 		
@@ -45,6 +48,9 @@ public class TestAPIService {
 				this.webClient.get().uri(uri.toString())
 				.retrieve().bodyToMono(String.class)
 				.block();
+		
+		// TODO 받은 response 값 -> CreateZip.class -> unZip.class -> get XML.toString
+		// return XML.toString
 		return response;
 	}
 	
