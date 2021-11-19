@@ -2,6 +2,7 @@ package com.board.home.service;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,6 +10,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -16,6 +19,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.board.util.ApiKey;
 import com.board.util.CreateZip;
 import com.board.util.ReadFile;
+import com.board.util.UnZip;
+
+import reactor.core.publisher.Flux;
 
 
 @Service
@@ -24,34 +30,37 @@ public class TestAPIService {
 	private WebClient webClient;
 	private final String QUESTIONMARK = "?";
 	private final String AMPERSAND = "&";
+	private final String RESOURCEPATH = "src/main/resources/"; 
 	
 	Path path = Paths.get("src/main/resources/apikey.properties");
 	private ReadFile apikey = new ReadFile(path);
 	private final String API = apikey.getStringData();
-//	private final String API = ApiKey.getApikey();
 	
-	public TestAPIService(WebClient.Builder webClientBuilder) {
-		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/corpCode.xml").build(); //고유번호
+	public TestAPIService() {}
+	
+//	public TestAPIService(WebClient.Builder webClientBuilder) {
+//		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/corpCode.xml").build(); //고유번호
 //		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/list.json").build(); // list
-	}
+//	}
 	
 	/**
-	 * TODO) 1. API -> binary 타입으로 호출됨 
-	 * 2. WebClient buffer limit 설정
 	 * 고유번호 조회*/
 	public String getUniqueNumber() {
-//		this.webClient = webClientBuilder.baseUrl("https://opendart.fss.or.kr/api/corpCode.xml").build(); //고유번호
 		
 		StringBuffer uri=new StringBuffer();
+		uri.append("https://opendart.fss.or.kr/api/corpCode.xml");
 		uri.append(QUESTIONMARK).append("crtfc_key=").append(API);
 		
-		String response =
-				this.webClient.get().uri(uri.toString())
-				.retrieve().bodyToMono(String.class)
-				.block();
-		
-		// TODO 받은 response 값 -> CreateZip.class -> unZip.class -> get XML.toString
-		// return XML.toString
+		String zipfile = RESOURCEPATH+"corpCode.zip";
+		Path path = Paths.get(zipfile);
+	    WebClient client = WebClient.builder().baseUrl(uri.toString()).build();
+	    
+	    Flux<DataBuffer> dataBufferFlux = client.get().retrieve().bodyToFlux(DataBuffer.class);
+	    DataBufferUtils.write(dataBufferFlux, path, StandardOpenOption.CREATE).block(); //Creates new file or overwrites exisiting file
+
+	    //TODO unzip -> return String
+	    
+	    String response="";
 		return response;
 	}
 	
@@ -66,19 +75,19 @@ public class TestAPIService {
 				"page_count=10"};
 		
 		StringBuffer uri=new StringBuffer();
+		uri.append("https://opendart.fss.or.kr/api/list.json");
 		uri.append(QUESTIONMARK).append("crtfc_key=").append(API);
 		for (int i = 0; i < str.length; i++) {
 			uri.append(AMPERSAND);
 			uri.append(str[i]);
 		}
 		logger.debug("uri data - "+uri.toString());
-		//TODO Stream으로 받을 것.
+		
+		WebClient client = WebClient.builder().baseUrl(uri.toString()).build();
 		String response =
-				this.webClient.get().uri(uri.toString())
+				client.get().uri(uri.toString())
 				.retrieve().bodyToMono(String.class)
 				.block();
-		
-		CreateZip cz = new CreateZip(response);
 		
 		return response;
 	}

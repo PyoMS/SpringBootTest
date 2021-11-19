@@ -1,15 +1,16 @@
 package com.board.util;
 
 import java.io.IOException;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.board.home.service.TestAPIService;
 
 /**
  * 
@@ -35,6 +36,24 @@ public class CreateZip {
 	public void setBinaryData(String binaryData) {
 		this.binaryData = binaryData;
 	}
+	public static byte[] zip(byte[] data)
+            throws Exception {
+
+        Deflater compressor = new Deflater();
+        compressor.setLevel(Deflater.BEST_COMPRESSION);
+        compressor.setInput(data);
+        compressor.finish();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream(2048);
+        byte[] buf = new byte[1024];
+        while (!compressor.finished()) {
+            int count = compressor.deflate(buf);
+            bos.write(buf, 0, count);
+        }
+        compressor.end(); 
+        bos.close();
+
+        return bos.toByteArray();
+    }
 
 	public void getCorpCodeZipFile() {
         byte[] buf = new byte[MAX_SIZE];
