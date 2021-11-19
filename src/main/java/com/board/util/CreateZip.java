@@ -13,11 +13,9 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * 
- * TODO binary zip 파일
- * 1. binary -> zip
- * 2. zip 해제 후 get CORPCODE.xml // path:src/main/resources/corpCode
- * 
+ * create zip file
+ * @TODO testing
+ * @author PMS
  * */ 
 public class CreateZip {
 	private static final Logger logger = LoggerFactory.getLogger(CreateZip.class);

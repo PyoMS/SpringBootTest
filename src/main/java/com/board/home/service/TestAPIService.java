@@ -1,5 +1,6 @@
 package com.board.home.service;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -30,7 +31,8 @@ public class TestAPIService {
 	private WebClient webClient;
 	private final String QUESTIONMARK = "?";
 	private final String AMPERSAND = "&";
-	private final String RESOURCEPATH = "src/main/resources/"; 
+	private final String RESOURCEPATH = "src/main/resources/";
+	private final String RESOURCEZIPPATH = "src/main/resources/corpCode/"; 
 	
 	Path path = Paths.get("src/main/resources/apikey.properties");
 	private ReadFile apikey = new ReadFile(path);
@@ -59,9 +61,15 @@ public class TestAPIService {
 	    DataBufferUtils.write(dataBufferFlux, path, StandardOpenOption.CREATE).block(); //Creates new file or overwrites exisiting file
 
 	    //TODO unzip -> return String
+	    Path source = Paths.get(zipfile);
+	    Path target = Paths.get(RESOURCEZIPPATH);
+	    UnZip.unzipFile(source, target);
 	    
-	    String response="";
-		return response;
+	    String decompressFile = RESOURCEZIPPATH+"CORPCODE.xml";
+	    StringBuffer strbuf = new StringBuffer();
+	    if(UnZip.ReadFile(decompressFile, strbuf)) logger.info("UnZip.ReadFile SUCCESS");
+	    
+		return "success";
 	}
 	
 	//TODO 해당 입력 정보를 array 형태로 받아서 for문으로 AMPERSAND 처리할 것. - json to array 처리.

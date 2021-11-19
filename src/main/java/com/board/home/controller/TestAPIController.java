@@ -31,7 +31,7 @@ public class TestAPIController {
 	public String getUniqNum(Model model) {
 		String response = testAPIService.getUniqueNumber();
 		model.addAttribute("response", response);
-		logger.info(response);
+//		logger.info(response); //대용량 데이터.
 		return response;
 	}
 }

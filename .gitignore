@@ -4,8 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### user option ###
 src/main/resources/application_APIKEY.properties
 src/main/resources/apikey.properties
+src/main/resources/corpCode/*.xml
 ### STS ###
 .apt_generated
 .classpath
